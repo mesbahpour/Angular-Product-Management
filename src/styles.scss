@@ -1,0 +1,21 @@
+@import "../src/assets/css/variables.scss";
+@import "../src/assets/css/reset.scss";
+@import "../src/assets/css/table.scss";
+@import"../src/assets/css/forms.scss";
+@import"../src/assets/css/shared.scss";
+
+@font-face {
+  font-family: 'yekan';
+  src: url('/assets/fonts/yekan.eot');
+  src: url('/assets/fonts/yekan.eot') format('embedded-opentype'),  /* IE6-8 */
+     url('/assets/fonts/yekan.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+     url('/assets/fonts/yekan.woff') format('truetype');
+}
+
+  body{
+    direction: rtl;
+    font-family: $fontFamily;
+  }
+
+  
+

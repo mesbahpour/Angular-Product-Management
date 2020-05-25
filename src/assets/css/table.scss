@@ -1,0 +1,62 @@
+section {
+  @extend .section;
+  text-align: center;
+
+  header {
+    @extend .header;
+  }
+
+  table {
+    color: $textColor;
+    margin: 20px auto;
+    width: $tableWidth;
+    tr {
+      border-top: 1px solid $border;
+      &:nth-child(even) {
+        background-color: $tableRows;
+      }
+      &:first-child {
+        border: 0;
+      }
+      &:not(:first-child):hover {
+        background-color: $hoverColor;
+        cursor: pointer;
+      }
+    }
+
+    th,
+    td {
+      padding: $tablePadding;
+      text-align: center;
+    }
+
+    th {
+      font-weight: bold;
+      &:not(:first-child):not(:second-child):not(:third-child) {
+        border-bottom: 3px solid $border;
+      }
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    table {
+      tr {
+        border-bottom: 2px solid $border;
+        display: block;
+      }
+
+      td {
+        border-bottom: 1px solid $border;
+        display: block;
+        font-size: $mobileFontSize;
+        text-align: right;
+
+        &::before {
+          content: attr(my-attr);
+          float: right;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

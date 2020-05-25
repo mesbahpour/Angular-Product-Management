@@ -1,0 +1,85 @@
+.formContainer {
+  @extend .section;
+
+  form {
+    padding: $tablePadding;
+  }
+  header {
+    @extend .header;
+    background-color: salmon;
+  }
+
+  input[type="text"],
+  select {
+    width: 30%;
+    padding: 12px;
+    margin: 15px;
+    border: 1px solid $border;
+    border-radius: $boraderRadius;
+    font-family: "yekan";
+    &:focus {
+      outline: none;
+    }
+  }
+
+  input[type="submit"] {
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: left;
+    margin: 15px;
+    margin-bottom: $tablePadding;
+    font-family: "yekan";
+    width: 90px;
+  }
+  input[type="radio"] {
+    cursor: pointer;
+  }
+  .submit {
+    background-color: $submitButton;
+    &:hover {
+      background-color: $hoverSubmitButton;
+    }
+  }
+  .reset {
+    background-color: $resetButton;
+    &:hover {
+      background-color: $hoverResetButton;
+    }
+  }
+
+  @media screen and (max-width: 950px) {
+    input[type="text"],
+    select {
+      width: 60%;
+    }
+  }
+}
+
+.alert {
+  padding: 20px;
+  background-color: $submitButton;
+  color: white;
+  width: $sectionWidth;
+  margin: 0 auto;
+  border-radius: $boraderRadius;
+  margin-top: 10px;
+}
+
+ .invalid {
+  color: red
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+input[type="submit"]:disabled {
+  background: #dddddd;
+  cursor: not-allowed;
+}

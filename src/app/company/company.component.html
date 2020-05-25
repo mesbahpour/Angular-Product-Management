@@ -1,0 +1,45 @@
+<div class="alert" *ngIf="alert">اطلاعات افزوده شد</div>
+
+<div class="formContainer">
+  <header>افزودن کمپانی جدید</header>
+  <form action="" [formGroup]="companyForm">
+    <p *ngIf="
+        (!companyForm.get('name').valid && companyForm.get('name').touched) ||
+        (submitted && companyForm.get('name').errors)
+      " class="invalid">
+      *نام کمپانی را وارد کنید
+    </p>
+
+    <p *ngIf="
+        (!companyForm.get('phone').valid && companyForm.get('phone').touched) ||
+        (submitted && companyForm.get('phone').errors)
+      " class="invalid">
+      *تلفن کمپانی را وارد کنید
+    </p>
+
+    <div>
+      <label for="name"> نام : &nbsp;&nbsp; </label>
+      <input type="text" formControlName="name" placeholder="نام" />
+    </div>
+    <div>
+      <label for="phone">تلفن :</label>
+      <input type="text" formControlName="phone" placeholder="تلفن" />
+    </div>
+    <div>
+      <label for="type"> نوع :&nbsp;&nbsp;</label>
+      <select formControlName="type">
+        <option  *ngFor="let device of electronicDevices" [value]="device">
+          {{device}}
+        </option>
+      </select>
+    </div>
+    <input type="submit" value="کلیک" (click)="submit()" class="submit" />
+    <input type="submit" value="پاک کردن" (click)="onReset()" class="reset" />
+  </form>
+</div>
+
+<!-- table -->
+<app-shared *ngIf="!isEmpty" [items]="companies" [headers]="headers" [title]="title">
+</app-shared>
+
+<h1 *ngIf="isEmpty" style="text-align: center;">اطلاعاتی موجود نیست</h1>

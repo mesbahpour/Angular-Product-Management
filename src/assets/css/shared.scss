@@ -1,0 +1,13 @@
+.section{
+    margin: 10px auto;
+    border: 1px solid $border;
+    width: $sectionWidth;
+    border-radius: $boraderRadius;
+    overflow: hidden;
+}
+
+.header{
+    padding: $tablePadding;
+    background-color: $tableRows;
+    border-bottom: 1px solid $border;
+}

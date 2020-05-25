@@ -1,0 +1,15 @@
+<section>
+  <header>{{title}}</header>
+  <table>
+    <tr>
+      <th *ngFor="let header of getValues">
+        {{ header }}
+      </th>
+    </tr>
+    <tr *ngFor="let item of items" (click)="showProducts(item.id)">
+      <td *ngFor="let header of getKeys">
+        {{ item[header] }}
+      </td>
+    </tr>
+  </table>
+</section>

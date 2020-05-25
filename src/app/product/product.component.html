@@ -1,0 +1,58 @@
+<div class="alert" *ngIf="alert">
+  اطلاعات افزوده شد
+</div>
+
+<div class="formContainer">
+  <header>
+    <span>افزودن محصول جدید</span>
+  </header>
+  <form action="" [formGroup]="productForm">
+    <p *ngIf="
+        (!productForm.get('mfgDate').valid &&
+          productForm.get('mfgDate').touched) ||
+        (submitted && productForm.get('mfgDate').errors)
+      " class="invalid">
+      *تاریخ تولید محصول را وارد کنید
+    </p>
+
+    <p *ngIf="
+        (!productForm.get('title').valid && productForm.get('title').touched) ||
+        (submitted && productForm.get('title').errors)
+      " class="invalid">
+      *عنوان محصول را وارد کنید
+    </p>
+
+    <p *ngIf="
+    (!productForm.get('status').valid && productForm.get('status').touched) ||
+    (submitted && productForm.get('status').errors)
+  " class="invalid">
+      *وضعیت محصول را وارد کنید
+    </p>
+
+    <div>
+      <label for="title">عنوان : </label>
+      <input type="text" formControlName="title" placeholder="عنوان" />
+    </div>
+    <div>
+      <label for="mfgDate">تاریخ :&nbsp;&nbsp; </label>
+      <input type="text" formControlName="mfgDate" placeholder="تاریخ " />
+    </div>
+    <div>
+      <label for="type"> وضعیت :&nbsp;&nbsp;</label>
+
+      <input id="فعال" type="radio" value="فعال" name="status" formControlName="status" />
+      <label for="فعال">فعال</label>
+
+      <input id="غیر فعال" type="radio" value="غیر فعال" name="status" formControlName="status" />
+      <label for="غیر فعال">غیر فعال</label>
+    </div>
+    <input type="submit" value="کلیک" (click)="submit()" class="submit" />
+    <input type="submit" value="پاک کردن" (click)="onReset()" class="reset" />
+  </form>
+</div>
+
+<!-- table -->
+<app-shared *ngIf="!isEmpty" [items]="products" [headers]="headers" [title]="title">
+</app-shared>
+
+<h1 *ngIf="isEmpty" style="text-align: center;">اطلاعاتی موجود نیست</h1>
