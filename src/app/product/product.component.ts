@@ -1,99 +1,107 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProjectService } from '../projectService.service';
 import { ActivatedRoute } from '@angular/router';
 import { CreateProductContrcat } from '../contracts/produtc.contract';
 import { Subscription } from 'rxjs';
-
+import { InputFormsComponent } from '../input-forms/input-forms.component';
+import { Product } from '../form-fields/product';
 
 @Component({
   selector: 'app-product',
-  templateUrl: './product.component.html'
+  templateUrl: './product.component.html',
 })
 export class ProductComponent implements OnInit {
-
+  product;
   headers = { title: 'عنوان', mfgDate: 'تاریخ ', status: 'وضعیت' };
-  productForm: FormGroup;
   companies;
   products;
   isEmpty = false;
   title = 'لیست  محصولات';
   alert = false;
-  submitted = false;
   unSubscribeGetProducts = new Subscription();
   unSubscribeGetCompanies = new Subscription();
-  unSubscribeAddProduct= new Subscription();
+  unSubscribeAddProduct = new Subscription();
+  data;
 
-  constructor(private projectService: ProjectService, private route: ActivatedRoute) {
-    this.productForm = new FormGroup({
-      title: new FormControl(null, Validators.required),
-      companyId: new FormControl(this.route.snapshot.params['id']),
-      mfgDate: new FormControl('1399-03-05', Validators.required),
-      status: new FormControl('فعال', Validators.required),
-    });
+  @ViewChild(InputFormsComponent) child;
+
+  constructor(
+    private projectService: ProjectService,
+    private route: ActivatedRoute
+  ) {
+    this.product = Product;
   }
 
   ngOnInit(): void {
     this.retrieveAllproduct();
   }
 
-
   retrieveAllproduct() {
-  this.unSubscribeGetProducts=  this.projectService.retrieveAllProducts().subscribe((res: any) => {
-    //search products
-      this.products = res.filter(product => product.companyId == this.route.snapshot.params['id']);
+    this.unSubscribeGetProducts = this.projectService
+      .retrieveAllProducts()
+      .subscribe(
+        (res: any) => {
+          //search products
+          this.products = res.filter(
+            (product) => product.companyId == this.route.snapshot.params['id']
+          );
 
-      //hide companyId and id keys in table
-      this.products.forEach(element => {
-        delete element['companyId'];
-        delete element['id'];
-      });
+          //hide companyId and id keys in table
+          this.products.forEach((element) => {
+            delete element['companyId'];
+            delete element['id'];
+          });
 
-      this.isEmpty = this.products.length < 1 ? true : false;
-      
-    }, error => {
-      console.log(error)
-    });
+          this.isEmpty = this.products.length < 1 ? true : false;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
-
   submit() {
-    this.submitted = true;
+    this.data = this.child.form;
 
     const createProduct = {
-      title: this.productForm.value.title,
+      title: this.data.value.title,
       companyId: this.route.snapshot.params['id'],
-      mfgDate: this.productForm.value.mfgDate,
-      status: this.productForm.value.status
-    } as CreateProductContrcat
+      mfgDate: this.data.value.mfgDate,
+      status: this.data.value.status,
+    } as CreateProductContrcat;
 
-    if (this.productForm.valid) {
-      this.unSubscribeAddProduct=  this.projectService.addProduct(createProduct).subscribe(res => {
-        this.products = res;
-        this.onReset();
-        this.retrieveAllproduct();
-        this.alert = true;
-        setTimeout(() => {
-          this.alert = false;
-        }, 2000);
-
-      }, error => {
-        console.log(error);
-      });
+    if (this.data.valid) {
+      this.unSubscribeAddProduct = this.projectService
+        .addProduct(createProduct)
+        .subscribe(
+          (res) => {
+            this.products = res;
+            this.data.reset();
+            this.retrieveAllproduct();
+            this.alert = true;
+            setTimeout(() => {
+              this.alert = false;
+            }, 2000);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
     }
   }
 
   retrieveAllCompanies() {
-    this.unSubscribeGetCompanies=  this.projectService.retrieveAllCompanies().subscribe(res => {
-      this.companies = res;
-    }, error => {
-      console.log(error)
-    });
-  }
-
-  onReset() {
-    this.submitted = false;
-    this.productForm.reset()
+    this.unSubscribeGetCompanies = this.projectService
+      .retrieveAllCompanies()
+      .subscribe(
+        (res) => {
+          this.companies = res;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   ngOnDestroy(): void {

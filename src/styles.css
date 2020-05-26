@@ -48,6 +48,15 @@ table {
   border-spacing: 0;
 }
 
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+section {
+  text-align: center;
+}
+
 section table {
   color: #000;
   margin: 20px auto;
@@ -73,7 +82,7 @@ section table tr:not(:first-child):hover {
 
 section table th,
 section table td {
-  padding: 20px;
+  padding: 15px;
   text-align: center;
 }
 
@@ -100,65 +109,108 @@ section table th:not(:first-child):not(:second-child):not(:third-child) {
     content: attr(my-attr);
     float: right;
     font-weight: bold;
-    text-transform: uppercase;
   }
 }
 
-.formContainer input[type=text], .formContainer select {
-  width: 20%;
+.formContainer form {
+  padding: 15px;
+}
+
+.formContainer header {
+  background-color: salmon;
+}
+
+.formContainer input[type="text"],
+.formContainer select {
+  width: 30%;
   padding: 12px;
   margin: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  font-family: 'yekan';
+  font-family: "yekan";
 }
 
-.formContainer input[type=text]:focus, .formContainer select:focus {
+.formContainer input[type="text"]:focus,
+.formContainer select:focus {
   outline: none;
 }
 
-.formContainer input[type=submit] {
-  background-color: #4CAF50;
+.formContainer input[type="submit"] {
   color: white;
   padding: 12px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  float: left;
+  margin: 15px;
+  margin-bottom: 15px;
+  font-family: "yekan";
+  width: 90px;
 }
 
-.formContainer input[type=submit]:hover {
+.formContainer input[type="radio"] {
+  cursor: pointer;
+}
+
+.formContainer .submit {
+  background-color: #4CAF50;
+}
+
+.formContainer .submit:hover {
   background-color: #45a049;
 }
 
+.formContainer .reset {
+  background-color: #dc3545;
+}
+
+.formContainer .reset:hover {
+  background-color: #ca3140;
+}
+
 @media screen and (max-width: 950px) {
-  .formContainer input[type=text], .formContainer select {
+  .formContainer input[type="text"],
+  .formContainer select {
     width: 60%;
-    padding: 12px;
-    margin: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-family: 'yekan';
-  }
-  .formContainer input[type=text]:focus, .formContainer select:focus {
-    outline: none;
   }
 }
 
-.formContainer label {
-  display: inline-block;
+.alert {
+  padding: 20px;
+  background-color: #4CAF50;
+  color: white;
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.invalid {
+  color: red;
+}
+
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+input[type="submit"]:disabled {
+  background: #dddddd;
+  cursor: not-allowed;
 }
 
 .section, section, .formContainer {
   margin: 10px auto;
   border: 1px solid #ddd;
-  width: 70%;
+  width: 80%;
   border-radius: 8px;
   overflow: hidden;
-  text-align: center;
 }
 
 .header, section header, .formContainer header {
-  padding: 20px;
+  padding: 15px;
   background-color: #FCFCFC;
   border-bottom: 1px solid #ddd;
 }

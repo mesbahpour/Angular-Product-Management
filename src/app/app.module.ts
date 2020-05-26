@@ -8,15 +8,15 @@ import { SharedComponent } from './shared/shared.component';
 import { ProjectService } from './projectService.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-
- 
+import { InputFormsComponent } from './input-forms/input-forms.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CompanyComponent,
     ProductComponent,
-    SharedComponent
+    SharedComponent,
+    InputFormsComponent
   ],
   imports: [
     BrowserModule,

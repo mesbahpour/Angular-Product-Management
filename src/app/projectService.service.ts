@@ -3,13 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { CreateCompanyContrcat } from './contracts/company.contract';
 import { CreateProductContrcat } from './contracts/produtc.contract';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   API_URL = 'http://localhost:3000/';
 
